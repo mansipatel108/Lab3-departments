@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-offset-2 col-md-8"></div>
             <h1>Department List</h1>
-            <a href="DepartmentList.aspx" class="btn btn-success btn-sm"><i class="fa fa-plus"></i>Add Department</a>
+            <a href="DepartmentDetails.aspx" class="btn btn-success btn-sm"><i class="fa fa-plus"></i>Add Department</a>
             <asp:GridView runat="server" CssClass="table table-bordered table-stripped table-hover" ID="DepartmentsGridView" AutoGenerateColumns="false">
                 <Columns>
                     <asp:BoundField DataField="DepartmentID" HeaderText="Department ID" Visible="true" />
