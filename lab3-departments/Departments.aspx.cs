@@ -8,6 +8,7 @@ using System.Web.UI.WebControls;
 //using statements are required to to connect to EF DB
 using lab3_departments.Models;
 using System.Web.ModelBinding;
+using System.Linq.Dynamic;
 
 namespace lab3_departments
 {
@@ -18,6 +19,8 @@ namespace lab3_departments
             //if loading the page for the first time populate the departements grid
             if (!IsPostBack)
             {
+                Session["SortColumn"] = "DepartmentID"; //default sort column
+                Session["SortDirection"] = "ASC";
                 //get the departments data
                 this.GetDepartments();
             }
@@ -37,12 +40,14 @@ namespace lab3_departments
             //connect to EF
             using (DefaultConnection db = new DefaultConnection())
             {
+                string SortString = Session["SortColumn"].ToString() + " " + Session["SortDirection"].ToString();
+
                 //query the studnets table usinf EF and LINQ
                 var Departments = (from allDepartments in db.Departments
                                    select allDepartments);
 
                 //bind the result in GridView
-                DepartmentsGridView.DataSource = Departments.ToList();
+                DepartmentsGridView.DataSource = Departments.AsQueryable().OrderBy(SortString).ToList();
                 DepartmentsGridView.DataBind();
 
                 
@@ -111,6 +116,45 @@ namespace lab3_departments
 
             //refresh the grid
             this.GetDepartments();
+        }
+
+        protected void DepartmentsGridView_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            //get the column to sort by
+            Session["SortColumn"] = e.SortExpression;
+
+            //refresh the grid
+            this.GetDepartments();
+
+            //toggle the diretion 
+            Session["SortDirection"] = Session["SortDirection"].ToString() == "ASC" ? "DESC" : "ASC";
+        }
+
+        protected void DepartmentsGridView_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (IsPostBack)
+            {
+                if(e.Row.RowType == DataControlRowType.Header) //if header row has been clicked 
+                {
+                    LinkButton linkButton = new LinkButton();
+
+                    for(int index = 0; index<DepartmentsGridView.Columns.Count -1; index++)
+                    {
+                        if(DepartmentsGridView.Columns[index].SortExpression == Session["SortColumn"].ToString())
+                        {
+                            if(Session["SortDirection"].ToString() == "ASC")
+                            {
+                                linkButton.Text = "<i class='fa fa-caret-up fa-lg'></i>";
+                            }
+                            else
+                            {
+                                linkButton.Text = "<i class='fa fa-caret-down fa-lg'></i>";
+                            }
+                            e.Row.Cells[index].Controls.Add(linkButton);
+                        }
+                    }
+                }
+            }
         }
     }
 }
