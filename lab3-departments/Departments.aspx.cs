@@ -48,6 +48,41 @@ namespace lab3_departments
                 
             }
         }
+
+        /// <summary>
+        /// this event handler deletes the departments form the DB using EF
+        /// </summary>
+        /// @method: DepartmentsGridView_RowDeleting
+        /// @param {object} sender
+        /// @param {GridViewDeleteEventArgs} e
+        /// @returns {void}
         
+
+        protected void DepartmentsGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            //store whic row was clicked
+            int selectedRow = e.RowIndex;
+
+            //get the selected departmentI using grids data key collection
+            int DepartmentID = Convert.ToInt32(DepartmentsGridView.DataKeys[selectedRow].Values["DepartmentID"]);
+
+            //use EF to find selected department in the DB and remove it
+            using(DefaultConnection db = new DefaultConnection())
+            {
+                //create object of department class and store the query string inside of it
+                Department deletedDepartment = (from departmentRecords in db.Departments
+                                                where departmentRecords.DepartmentID == DepartmentID
+                                                select departmentRecords).FirstOrDefault();
+
+                //remove the selected deartment from DB
+                db.Departments.Remove(deletedDepartment);
+
+                //save my changes to back to DB
+                db.SaveChanges();
+
+                //refresh the grid
+                this.GetDepartments();
+            }
+        }
     }
 }
