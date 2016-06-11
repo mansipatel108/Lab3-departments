@@ -84,5 +84,24 @@ namespace lab3_departments
                 this.GetDepartments();
             }
         }
+
+        /**
+         * <summary>
+         * this event handler allows pagination to occure for the departments page
+         * </summary>
+         * 
+         * @method DepartmentsGridView_PageIndexChanging
+         * @param {object} sender
+         * @param {GridViewPageEventHandlerArgs} e
+         * @returns {void}
+         * */
+        protected void DepartmentsGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            //set the new page number
+            DepartmentsGridView.PageIndex = e.NewPageIndex;
+
+            //return the grid
+            this.GetDepartments();
+        }
     }
 }

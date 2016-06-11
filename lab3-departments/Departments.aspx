@@ -7,7 +7,9 @@
             <h1>Department List</h1>
             <a href="DepartmentDetails.aspx" class="btn btn-success btn-sm"><i class="fa fa-plus"></i>Add Department</a>
             <asp:GridView runat="server" CssClass="table table-bordered table-stripped table-hover" ID="DepartmentsGridView" AutoGenerateColumns="false"
-                DataKeyNames="DepartmentID" OnRowDeleting="DepartmentsGridView_RowDeleting" >
+                DataKeyNames="DepartmentID" OnRowDeleting="DepartmentsGridView_RowDeleting" AllowPaging="true" PageSize="3"
+                 OnPageIndexChanging="DepartmentsGridView_PageIndexChanging">
+                 
                 <Columns>
                     <asp:BoundField DataField="DepartmentID" HeaderText="Department ID" Visible="true" />
                     <asp:BoundField DataField="Name" HeaderText="Department Name" Visible="true" />
