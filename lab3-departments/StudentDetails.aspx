@@ -1,5 +1,13 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="StudentDetails.aspx.cs" Inherits="lab3_departments.StudentDetails" %>
 
+<%--
+File Name: StudentDetails.aspx
+Author Name: Mansi Patel(200303640) & Shweta Chavda(200326347)
+Website Name: http://departments-lab.azurewebsites.net/
+Description: When user want to modify details for the Studnets This page will allow them to change the data .
+ @date: June 13, 2016
+ @version: 0.0.1  --%>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container">
         <div class="row">

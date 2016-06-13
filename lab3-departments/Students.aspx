@@ -1,5 +1,13 @@
 ﻿<%@ Page Title="Students" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Students.aspx.cs" Inherits="lab3_departments.Students" %>
 
+<%--
+File Name: Students.aspx
+Author Name: Mansi Patel(200303640) & Shweta Chavda(200326347)
+Website Name: http://departments-lab.azurewebsites.net/
+Description: This page contains detalis(like firstname, lastname and enrollment date) about the students who are studying in the in Contoso University 
+ @date: June 13, 2016
+ @version: 0.0.1  --%>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container">
         <div class="row">

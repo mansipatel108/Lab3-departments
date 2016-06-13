@@ -1,5 +1,13 @@
 ﻿<%@ Page Title="Departments" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Departments.aspx.cs" Inherits="lab3_departments.Departments" %>
 
+<%--
+File Name: Departments.aspx
+Author Name: Mansi Patel(200303640) & Shweta Chavda(200326347)
+Website Name: http://departments-lab.azurewebsites.net/
+Description: This page contains detalis about the Departments name and how much budget each departments have in Contoso University
+ @date: June 13, 2016
+ @version: 0.0.1  --%>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container">
         <div class="row">
@@ -27,7 +35,7 @@
                     <asp:BoundField DataField="DepartmentID" HeaderText="Department ID" Visible="true" SortExpression="DepartmentID" />
                     <asp:BoundField DataField="Name" HeaderText="Department Name" Visible="true" SortExpression="Name" />
                     <asp:BoundField DataField="Budget" HeaderText="Department Budget" Visible="true"
-                        DataFormatString="{0:###,###.00}" SortExpression="Budget" />
+                        DataFormatString="{0:c}" SortExpression="Budget" />
                     <asp:HyperLinkField HeaderText="Edit" Text="<i class='fa fa-pencil-square-o fa-lg'></i> Edit" 
                         NavigateUrl="~/DepartmentDetails.aspx" ControlStyle-CssClass="btn btn-primary btn-sm" runat="server"
                          DataNavigateUrlFields="DepartmentID" DataNavigateUrlFormatString="DepartmentDetails.aspx?DepartmentID={0}"  />

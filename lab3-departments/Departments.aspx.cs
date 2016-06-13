@@ -65,10 +65,10 @@ namespace lab3_departments
 
         protected void DepartmentsGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            //store whic row was clicked
+            //store which row was clicked
             int selectedRow = e.RowIndex;
 
-            //get the selected departmentI using grids data key collection
+            //get the selected departmentID using grids data key collection
             int DepartmentID = Convert.ToInt32(DepartmentsGridView.DataKeys[selectedRow].Values["DepartmentID"]);
 
             //use EF to find selected department in the DB and remove it
@@ -118,6 +118,17 @@ namespace lab3_departments
             this.GetDepartments();
         }
 
+        /**
+         * <summary>
+         * this event handler allows sorting to occure for the departments page
+         * </summary>
+         * 
+         * @method DepartmentsGridView_Sorting
+         * @param {object} sender
+         * @param {GridViewSortEventHandlerArgs} e
+         * @returns {void}
+         * */
+
         protected void DepartmentsGridView_Sorting(object sender, GridViewSortEventArgs e)
         {
             //get the column to sort by
@@ -129,6 +140,18 @@ namespace lab3_departments
             //toggle the diretion 
             Session["SortDirection"] = Session["SortDirection"].ToString() == "ASC" ? "DESC" : "ASC";
         }
+
+        /**
+         * <summary>
+         * this event handler allows sorting on each row with indication of whether the row is sorted in ASC or DESC order
+         *  for the departments page
+         * </summary>
+         * 
+         * @method DepartmentsGridView_RowDataBound
+         * @param {object} sender
+         * @param {GridViewRowDataBoundEventHandlerArgs} e
+         * @returns {void}
+         * */
 
         protected void DepartmentsGridView_RowDataBound(object sender, GridViewRowEventArgs e)
         {
